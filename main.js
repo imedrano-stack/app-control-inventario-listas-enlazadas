@@ -259,3 +259,36 @@ class Inventario{
         aux.siguiente.siguiente = temporal
     }   
 }
+
+//FUNCIONES
+
+function crearTabla(){
+    div.textContent=""
+    div.insertAdjacentHTML("beforeend",
+    `<table id="t1" style="text-align:center">
+        <thead>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Costo</th>
+        <thead>
+    <tbody id="tabla" style="text-align:center"></tbody>
+    <p id ="merc"></p>`)
+}
+
+function validar(){
+    if (codigo.value == "" || nombre.value == "" || desc.value == "" || cantidad.value =="" || costo.value ==""){
+        
+        div.textContent=""
+
+        div.insertAdjacentHTML("beforeend","<p>Un espacio esta vacío.</p>")
+
+        return false
+    }
+    else{
+        return 1
+    }
+}
+
+let inv = new Inventario()
