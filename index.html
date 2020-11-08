@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App control de inventario</title>
+</head>
+<body>
+    <div>
+        <form>
+            <label for="codigo">Codigo del producto:</label><br>
+            <input type="text" id="codigo" placeholder="Código"><br><br>
+
+            <label for="nombre">Nombre del producto:</label><br>
+            <input type="text" id="nombre" placeholder="Nombre"><br><br>
+
+            <label for="descripcion">Descripción del producto:</label><br>
+            <input type="text" style= "height:50px" id="descripcion" placeholder="Descripción"><br><br>
+
+            <label for="cantidad">Cantidad del producto:</label><br>
+            <input type="text" id="cantidad" placeholder="Cantidad"><br><br>
+
+            <label for="costo">Costo del producto:</label><br>
+            <input type="text" id="costo" placeholder="Costo"><br><br>
+
+            <label for="posicion">Insetar en posición:</label><br>
+            <input type="text" id="posicion" placeholder="Posición(opcional)"><br><br>
+            
+            <input type="button" id="agregar" value="Agregar producto">
+            <input type="button" id="borrar" value="Borrar por código">
+            <input type="button" id="buscar" value="Buscar por código">
+            <input type="button" id="listar" value="Listar">
+            <input type="button" id="listarInverso" value="Listar inverso">
+            <input type="button" id="agregarInicio" value="Agregar al inicio">
+            <input type="button" id="borrarInicio" value ="Borrar el inicio">
+        </form>
+    </div>
+    <div id="resultado"></div>
+    <script src="main.js"></script>
+</body>
+</html>
