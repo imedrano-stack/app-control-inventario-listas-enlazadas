@@ -152,16 +152,16 @@ class Inventario{
     listar(){
 
         crearTabla()
-        let valMer = 0
+        let valorMercancia = 0
 
         let tabla = document.querySelector("#tabla")
 
-        let merc = document.querySelector("#merc")
+        let mercancia = document.querySelector("#mercancia")
 
         if (this.inicio == null){
             div.textContent=""
 
-            div.insertAdjacentHTML("beforeend","No hay productos")
+            div.insertAdjacentHTML("beforeend","No existen productos")
 
             return false
         }
@@ -181,27 +181,28 @@ class Inventario{
             col2.textContent = aux.descripcion
             col3.textContent = aux.cantidad
             col4.textContent = aux.costo
-            valMer += (parseInt(aux.cantidad) * parseInt(aux.costo))
+            valorMercancia += (parseInt(aux.cantidad) * parseInt(aux.costo))
             aux = aux.siguiente
         }
-        merc.textContent = "El valor de la mercancia es: $"+valMer
+        mercancia.textContent = "Valor total de la mercancia: $"+ valorMercancia
     }
 
     listarInverso(){
         crearTabla()
-        let valMer = 0
+        let valorMercancia = 0
 
         let tabla = document.querySelector("#tabla")
 
-        let merc = document.querySelector("#merc")
+        let mercancia = document.querySelector("#mercancia")
         
         if (this.inicio == null){
             div.textContent=""
 
-            div.insertAdjacentHTML("beforeend","No hay productos")
+            div.insertAdjacentHTML("beforeend","No existen productos")
 
             return false;
         }
+
         aux = this.inicio
 
         while (aux != null){
@@ -214,19 +215,21 @@ class Inventario{
 
             col.textContent = aux.codigo
             col1.textContent = aux.nombre
-            col2.textContent = aux.desc
+            col2.textContent = aux.descripcion
             col3.textContent = aux.cantidad
             col4.textContent = aux.costo
-            valMer += (parseInt(aux.cantidad) * parseInt(aux.costo))
+            valorMercancia += (parseInt(aux.cantidad) * parseInt(aux.costo))
             aux = aux.siguiente
         }
-        merc.textContent = "El valor de la mercancia es: $"+valMer
+        mercancia.textContent = "El valor de la mercancia es: $"+valorMercancia
     }
     
     agregarPos(producto,posicion){
+
         if(this.inicio == null){
             return false
         }
+
         aux = this.inicio
 
         while (aux != null){
@@ -244,14 +247,15 @@ class Inventario{
             aux = aux.siguiente
             i++
         }
+
         if(aux == null){
             return false
         }
 
-        let temp = aux.siguiente
+        let temporal = aux.siguiente
 
         aux.siguiente = producto
 
-        aux.siguiente.siguiente = temp
+        aux.siguiente.siguiente = temporal
     }   
 }
