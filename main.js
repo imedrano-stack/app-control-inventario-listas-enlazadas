@@ -184,7 +184,7 @@ class Inventario{
             valorMercancia += (parseInt(aux.cantidad) * parseInt(aux.costo))
             aux = aux.siguiente
         }
-        mercancia.textContent = "Valor total de la mercancia: $"+ valorMercancia
+        mercancia.textContent = "Valor total de la mercancia: $"+valorMercancia
     }
 
     listarInverso(){
@@ -274,11 +274,11 @@ function crearTabla(){
             <th>Costo</th>
         <thead>
     <tbody id="tabla" style="text-align:center"></tbody>
-    <p id ="merc"></p>`)
+    <p id ="mercancia"></p>`)
 }
 
 function validar(){
-    if (codigo.value == "" || nombre.value == "" || desc.value == "" || cantidad.value =="" || costo.value ==""){
+    if (codigo.value == "" || nombre.value == "" || descripcion.value == "" || cantidad.value =="" || costo.value ==""){
         
         div.textContent=""
 
@@ -291,4 +291,176 @@ function validar(){
     }
 }
 
-let inv = new Inventario()
+//BOTONES
+
+let inventario = new Inventario()
+
+btnAgregar.addEventListener("click",()=>{
+    if (posicion.value == ""){
+
+        let validacion = validar()
+        
+        if (validacion == 1){
+
+            let nuevo = new Producto(codigo.value,nombre.value,descripcion.value,cantidad.value,costo.value)
+
+            let agrgar = inventario.agregar(nuevo)
+
+            if (agrgar == false){
+                div.textContent=""
+                div.insertAdjacentHTML("beforeend","<p>El codigo del producto ya existe.</p>")
+            }
+            else{
+                div.textContent=""
+                div.insertAdjacentHTML("beforeend","<p>Producto agregado.</p>")
+            }
+        }
+    }
+    else if (posicion.value == 1){
+        let validacion = validar()
+
+        if (validacion == 1){
+            let nuevo = new Producto(codigo.value,nombre.value,descripcion.value,cantidad.value,costo.value)
+
+            let agrg = inventario.agregarInicio(nuevo)
+
+            if (agrg == false){
+                div.textContent=""
+                div.insertAdjacentHTML("beforeend","<p>El codigo del producto ya existe.</p>")
+            }
+
+            else{
+                div.textContent="";
+                div.insertAdjacentHTML("beforeend","<p>Producto agregado.</p>")
+            }
+        }
+    }
+
+    else{
+        let validacion = validar()
+
+        if (validacion == 1){
+            let nuevo = new Producto(codigo.value,nombre.value,descripcion.value,cantidad.value,costo.value)
+            let agregarpos = inventario.agregarPos(nuevo,posicion.value)
+
+            if (agregarpos == false){
+                div.textContent=""
+                div.insertAdjacentHTML("beforeend","<p>No se pudo agregar</p>")
+            }
+
+            else{
+                div.textContent="";
+                div.insertAdjacentHTML("beforeend","<p>Producto agregado.</p>")
+            }
+        }
+    }
+})
+
+btnBorrar.addEventListener("click",()=>{
+    producto = inventario.borrarCodigo(codigo.value)
+
+    if (producto == null){
+        div.textContent=""
+        div.insertAdjacentHTML("beforeend","El producto no existe: "+producto)
+        return false
+    }
+
+    let atributos =["codigo","nombre","descripcion","cantidad","costo"]
+
+    let labels = ["Código","Nombre","Descripción","Cantidad","Costo"]
+
+    div.textContent=""
+
+    div.insertAdjacentHTML("beforeend","<p>Producto eliminado.</p>")
+
+    div.insertAdjacentHTML("beforeend","<ul id='lista'></ul>")
+
+    let lista = document.querySelector("#lista")
+
+    for(let i = 0; i<5; i++){
+        let item = document.createElement("li")
+        item.textContent=labels[i]+": "+producto[atributos[i]]
+        lista.appendChild(item)
+    }
+})
+
+btnBuscar.addEventListener("click",()=>{
+    producto = inventario.buscarCodigo(codigo.value)
+
+    if (producto == null){
+        div.textContent=""
+        div.insertAdjacentHTML("beforeend","El producto no existe: "+producto)
+        return false
+    }
+
+    let atributos =["codigo","nombre","descripcion","cantidad","costo"]
+
+    let labels = ["Código","Nombre","Descripción","Cantidad","Costo"]
+
+    div.textContent=""
+
+    div.insertAdjacentHTML("beforeend","<ul id='lista'></ul>")
+
+    let lista = document.querySelector("#lista")
+
+    for(let i = 0; i<5; i++){
+        let item = document.createElement("li")
+        item.textContent=labels[i]+": "+producto[atributos[i]]
+        lista.appendChild(item)
+    }
+})
+
+btnListar.addEventListener("click",()=>{
+    inventario.listar();
+})
+
+btnListarInverso.addEventListener("click",()=>{
+    inventario.listarInverso();
+})
+
+btnAgregarInicio.addEventListener("click",()=>{
+    let validacion = validar()
+
+        if (validacion == 1){
+            let nuevo = new Producto(codigo.value,nombre.value,descripcion.value,cantidad.value,costo.value)
+            let agregar = inventario.agregarInicio(nuevo)
+            if (agregar == false){
+                div.textContent=""
+                div.insertAdjacentHTML("beforeend","<p>El codigo del producto ya existe.</p>")
+            }
+            
+            else{
+                div.textContent="";
+                div.insertAdjacentHTML("beforeend","<p>Producto agregado.</p>")
+            }
+            
+        }
+})
+
+btnBorrarInicio.addEventListener("click",()=>{
+    let producto = inventario.borrarInicio()
+
+    if (producto == null){
+        div.textContent=""
+        div.insertAdjacentHTML("beforeend","El producto no existe: "+producto)
+        return false
+    }
+
+    let atributos =["codigo","nombre","descripcion","cantidad","costo"]
+
+    let labels = ["Código","Nombre","Descripción","Cantidad","Costo"]
+
+    div.textContent=""
+
+    div.insertAdjacentHTML("beforeend","<p>Producto eliminado.</p>")
+
+    div.insertAdjacentHTML("beforeend","<ul id='lista'></ul>")
+
+    let lista = document.querySelector("#lista")
+
+    for(let i = 0; i<5; i++){
+        let item = document.createElement("li")
+        item.textContent=labels[i]+": "+producto[atributos[i]]
+        lista.appendChild(item)
+    }
+})
